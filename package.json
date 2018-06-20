@@ -1,12 +1,10 @@
 {
   "name": "oip-exchange-rate",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Get the Exchange Rate for many cryptocurrencies",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
+  "main": "lib/index.js",
   "dependencies": {
+    "axios": "^0.18.0",
     "insight-explorer": "^1.0.2"
   },
   "devDependencies": {
