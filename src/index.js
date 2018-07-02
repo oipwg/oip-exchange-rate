@@ -1,6 +1,6 @@
 import { Insight } from 'insight-explorer'
 
-import URLExplorer from './URLExplorer'
+import URLExplorer from './URLExplorer.js'
 
 const default_coins = {
 	bitcoin: {

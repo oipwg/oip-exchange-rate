@@ -1,6 +1,6 @@
 {
   "name": "oip-exchange-rate",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "description": "Get the Exchange Rate for many cryptocurrencies",
   "main": "lib/index.js",
   "dependencies": {
@@ -35,5 +35,6 @@
   "homepage": "https://github.com/oipwg/oip-exchange-rate#readme",
   "jest": {
     "testEnvironment": "node"
-  }
+  },
+  "files": ["lib"]
 }
