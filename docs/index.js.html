@@ -216,49 +216,44 @@ class Exchange {
 	 * 	console.log(rate);
 	 * })
 	 */
-	getExchangeRate(coin, fiat){
-		return new Promise((resolve, reject) => {
-			var matchedTransform = DEFAULT_TRANSFORM_FUNCTION;
+	async getExchangeRate(coin, fiat){
+		var matchedTransform = DEFAULT_TRANSFORM_FUNCTION;
 
-			if (coin === fiat){
-				resolve(1);
-				return
-			}
+		if (coin === fiat){
+			return 1
+		}
 
-			for (var c in this.coins){
-				if (c === coin || coin === aliases[c]){
-					for (var fiat_type in this.coins[c]){
-						if (fiat_type === fiat){
-							if (!this.explorers[c])
-								this.explorers[c] = {}
+		for (var c in this.coins){
+			if (c === coin || coin === aliases[c]){
+				for (var fiat_type in this.coins[c]){
+					if (fiat_type === fiat){
+						if (!this.explorers[c])
+							this.explorers[c] = {}
 
-							if (!this.explorers[c][fiat_type]){
-								if (this.coins[c][fiat_type].insight){
-									this.explorers[c][fiat_type] = new Insight(this.coins[c][fiat_type].insight)
-								} else if (this.coins[c][fiat_type].url) {
-									this.explorers[c][fiat_type] = new URLExplorer(this.coins[c][fiat_type].url, this.coins[c][fiat_type].transform)
-								}
+						if (!this.explorers[c][fiat_type]){
+							if (this.coins[c][fiat_type].insight){
+								this.explorers[c][fiat_type] = new Insight(this.coins[c][fiat_type].insight)
+							} else if (this.coins[c][fiat_type].url) {
+								this.explorers[c][fiat_type] = new URLExplorer(this.coins[c][fiat_type].url, this.coins[c][fiat_type].transform)
+							}
+						}
+
+						if (this.explorers[c][fiat_type]){
+							matchedTransform = this.coins[c][fiat_type].transform;
+							
+							let info = await this.explorers[c][fiat_type].getExchangeRate()
+							let rate = info
+
+							if (this.coins[c][fiat_type].transform){
+								rate = matchedTransform(info);
 							}
 
-							if (this.explorers[c][fiat_type]){
-								matchedTransform = this.coins[c][fiat_type].transform;
-								this.explorers[c][fiat_type].getExchangeRate().then((info) => {
-									var rate = info;
-
-									if (this.coins[c][fiat_type].transform){
-										rate = matchedTransform(info);
-									}
-
-									resolve(rate)
-								}).catch((e) => {
-									reject(e);
-								})
-							}
+							return rate
 						}
 					}
 				}
 			}
-		})
+		}
 	}
 }
 
