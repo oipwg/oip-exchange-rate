@@ -5,40 +5,40 @@ import URLExplorer from './URLExplorer.js'
 const defaultCoins = {
   bitcoin: {
     usd: {
-      insight: 'https://insight.bitpay.com/api',
+      url: 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd',
       transform: function (response) {
-        if (response && response.data && response.data.bitstamp) {
-          return response.data.bitstamp
+        if (response && response.bitcoin && response.bitcoin.usd) {
+          return response.bitcoin.usd
         }
       }
     }
   },
   litecoin: {
     usd: {
-      url: 'https://api.coinmarketcap.com/v1/ticker/litecoin/',
+      url: 'https://api.coingecko.com/api/v3/simple/price?ids=litecoin&vs_currencies=usd',
       transform: function (response) {
-        if (response && response[0] && response[0].price_usd) {
-          return parseFloat(response[0].price_usd)
+        if (response && response.litecoin && response.litecoin.usd) {
+          return response.litecoin.usd
         }
       }
     }
   },
   flo: {
     usd: {
-      insight: 'https://livenet.flocha.in/api',
+      url: 'https://api.coingecko.com/api/v3/simple/price?ids=flo&vs_currencies=usd',
       transform: function (response) {
-        if (response && response.data && response.data.bitstamp) {
-          return response.data.bitstamp
+        if (response && response.flo && response.flo.usd) {
+          return response.flo.usd
         }
       }
     }
   },
   raven: {
     usd: {
-      url: 'https://api.coinmarketcap.com/v1/ticker/ravencoin/',
+      url: 'https://api.coingecko.com/api/v3/simple/price?ids=ravencoin&vs_currencies=usd',
       transform: function (response) {
-        if (response && response[0] && response[0].price_usd) {
-          return parseFloat(response[0].price_usd)
+        if (response && response.ravencoin && response.ravencoin.usd) {
+          return response.ravencoin.usd
         }
       }
     }
@@ -53,12 +53,11 @@ const defaultCoins = {
  * {
  *   'bitcoin': {
  *     'usd': {
- *       'url': "https://api.coinmarketcap.com/v2/ticker/1/",
- *       'transform': function(data){
- *         if (data && data.data && data.data.quotes && data.data.quotes.USD && data.data.quotes.USD.price)
- *           return data.data.quotes.USD.price
- *
- *         return
+ *       'url': 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd',
+ *       'transform': function (response) {
+ *         if (response && response.bitcoin && response.bitcoin.usd) {
+ *           return response.bitcoin.usd
+ *         }
  *       }
  *     }
  *   }
@@ -74,12 +73,11 @@ const defaultCoins = {
  * @example
  * {
  *   'usd': {
- *     'url': "https://api.coinmarketcap.com/v2/ticker/1/",
- *     'transform': function(data){
- *       if (data && data.data && data.data.quotes && data.data.quotes.USD && data.data.quotes.USD.price)
- *         return data.data.quotes.USD.price
- *
- *       return
+ *     'url': 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd',
+ *     'transform': function (response) {
+ *       if (response && response.bitcoin && response.bitcoin.usd) {
+ *         return response.bitcoin.usd
+ *       }
  *     }
  *   }
  * }
