@@ -1,23 +1,29 @@
 {
-  "name": "oip-exchange-rate",
-  "version": "1.0.7",
+  "name": "@oipwg/exchange-rate",
+  "version": "2.0.0-beta.1",
   "description": "Get the Exchange Rate for many cryptocurrencies",
   "main": "lib/index.js",
   "dependencies": {
-    "axios": "^0.18.0",
-    "insight-explorer": "^1.0.3"
+    "axios": "^0.19.2",
+    "@oipwg/insight-explorer": "^2.0.0-beta.0"
   },
   "devDependencies": {
-    "babel-preset-es2015": "^6.24.1",
-    "babel-cli": "^6.26.0",
-    "jest": "^23.1.0",
-    "jsdoc": "^3.5.5",
-    "jsdoc-template": "git+https://github.com/oipwg/jsdoc-template.git"
+    "@babel/core": "^7.8.4",
+    "@babel/cli": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/runtime": "^7.8.4",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "jest": "^25.1.0",
+    "jsdoc": "^3.6.3",
+    "jsdoc-template": "git+https://github.com/oipwg/jsdoc-template.git",
+    "standard": "^14.3.1"
   },
   "scripts": {
-    "test": "npm run compile && jest",
-    "compile": "./node_modules/.bin/babel --presets es2015 -d lib/ src/",
-    "prepare": "npm run generate-docs && npm run compile",
+    "test": "standard && jest",
+    "standard": "standard",
+    "standard-fix": "standard --fix",
+    "compile": "./node_modules/.bin/babel -d lib/ src/",
+    "prepublishOnly": "npm run generate-docs && npm run compile",
     "generate-docs": "node_modules/.bin/jsdoc --readme ./README.md -c jsdoc.json"
   },
   "repository": {
@@ -27,7 +33,10 @@
   "keywords": [
     "OIP"
   ],
-  "author": "Sky Young <sky@alexandria.io>",
+  "contributors": [
+    "Sky Young",
+    "Jeremiah <bitspill@alexandria.io>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/oipwg/oip-exchange-rate/issues"
@@ -36,5 +45,20 @@
   "jest": {
     "testEnvironment": "node"
   },
-  "files": ["lib"]
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  },
+  "files": [
+    "lib"
+  ],
+  "standard": {
+    "ignore": [
+      "docs/"
+    ]
+  }
 }
