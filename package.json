@@ -16,6 +16,7 @@
     "jest": "^29.5.0",
     "jsdoc": "^4.0.2",
     "jsdoc-template": "git+https://github.com/oipwg/jsdoc-template.git",
+    "taffydb": "^2.7.3",
     "standard": "^17.0.0"
   },
   "scripts": {
