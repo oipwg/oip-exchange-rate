@@ -25,10 +25,10 @@ const defaultCoins = {
   },
   flo: {
     usd: {
-      url: 'https://api.coingecko.com/api/v3/simple/price?ids=flo&vs_currencies=usd',
+      url: 'https://api.coingecko.com/api/v3/simple/price?ids=public-index-network&vs_currencies=usd',
       transform: function (response) {
-        if (response && response.flo && response.flo.usd) {
-          return response.flo.usd
+        if (response && response['public-index-network'] && response['public-index-network'].usd) {
+          return response['public-index-network'].usd
         }
       }
     }
