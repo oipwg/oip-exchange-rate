@@ -28,7 +28,9 @@ jobs:
           node-version: 18
           registry-url: https://registry.npmjs.org/
       - run: npm ci
+      - run: npm run standard
       - run: npm run compile
+      - run: npm run generate-docs # ToDo commit docs
       - run: npm publish --access-public
         env:
           NODE_AUTH_TOKEN: ${{secrets.oip_npm_token}}
